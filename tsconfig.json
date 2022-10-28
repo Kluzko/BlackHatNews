@@ -20,6 +20,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": "./",
+    "types": [
+      "vite-plugin-pwa/client"
+    ],
     "paths": {
       "react": [
         "./node_modules/preact/compat/"
