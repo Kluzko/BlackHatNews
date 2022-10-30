@@ -1,0 +1,1 @@
+export { useFetchHackerNews } from './useFetchHackerNews'
