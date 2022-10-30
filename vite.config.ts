@@ -7,6 +7,37 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
     preact(),
-    VitePWA(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      },
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'safari-pinned-tab.svg'],
+      manifest: {
+        name: "BlackHat News",
+        short_name: "BHN",
+        description: "BlackHat is app using hackernews api but its with dark mode.",
+        icons: [
+          {
+            src: "/android-chrome-192x192.png",
+            sizes: "192x192",
+            type: "image/png"
+          },
+          {
+            src: "/android-chrome-512x512.png",
+            sizes: "512x512",
+            type: "image/png"
+          },
+          {
+            src: "/android-chrome-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: 'any maskable'
+          }
+        ],
+        theme_color: "#161722",
+
+      }
+    }),
   ]
 })
