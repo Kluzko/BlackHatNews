@@ -1,0 +1,1 @@
+type storiesUriType = "topstories.json" | "beststories.json" | "newstories.json"

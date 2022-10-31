@@ -1,16 +1,14 @@
 
 import { useState } from 'preact/hooks';
-import Card from './components/Card'
-import { LoadingError } from './components/Error';
-import { BaseLoader } from './components/Loader';
+import { Articles } from './components/Articles';
 import { Select } from './components/Select';
-import { useFetchHackerNews } from './hooks';
+
 export function App() {
 
 
   const [selectedStorie, setSelectedStorie] = useState<string>("TOP")
 
-  let currentStorie = "topstories.json"
+  let currentStorie: storiesUriType = "topstories.json"
 
   if (selectedStorie === "TOP") {
     currentStorie = "topstories.json"
@@ -22,22 +20,6 @@ export function App() {
     currentStorie = "newstories.json"
   }
 
-  console.log(currentStorie, selectedStorie);
-
-
-  const { data, error } = useFetchHackerNews({
-    uri: currentStorie
-  })
-
-  if (error)
-    return <LoadingError />
-  if (!data)
-    return <BaseLoader />
-
-
-
-  const articlesIds = data.slice(0, 5);
-
 
   return (
     <div class="flex flex-col items-center h-screen w-screen">
@@ -45,14 +27,7 @@ export function App() {
         BlackHat <span class="text-orange-600">News!</span>
       </h1>
       <Select setSelected={setSelectedStorie} />
-      <div class="flex flex-col items-center w-full">
-        {
-          articlesIds.map((id: number) => (
-            <Card id={id} />
-          ))
-        }
-
-      </div>
+      <Articles storieType={currentStorie} storiesQuantity={5} />
     </div>
   )
 }
