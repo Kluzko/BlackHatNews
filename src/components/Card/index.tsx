@@ -12,7 +12,7 @@ type CardProps = {
 const Card = ({ id }: CardProps) => {
 
 
-    const { data, error } = useFetchHackerNews({
+    const { data, error } = useFetchHackerNews<HackerNewsArticleApi>({
         uri: `/item/${id}.json`
     })
 

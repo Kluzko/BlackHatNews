@@ -3,18 +3,23 @@ import Card from "../Card"
 import { LoadingError } from "../Error"
 import { BaseLoader } from "../Loader"
 
+
 type ArticlesProps = {
     storieType: storiesUriType
     storiesQuantity: number
+    pageNumber: number
 }
 
 
 
-export const Articles = ({ storieType, storiesQuantity }: ArticlesProps) => {
+export const Articles = ({ storieType, storiesQuantity, pageNumber }: ArticlesProps) => {
 
-    const { data, error } = useFetchHackerNews({
+    const { data, error } = useFetchHackerNews<number[]>({
         uri: storieType
     })
+
+    const startIndex = pageNumber === 0 ? (pageNumber * storiesQuantity) : (pageNumber * storiesQuantity) + 1
+    const endIndex = startIndex + storiesQuantity
 
     if (error)
         return <LoadingError />
@@ -24,11 +29,10 @@ export const Articles = ({ storieType, storiesQuantity }: ArticlesProps) => {
     return (
         <div class="flex flex-col items-center w-full">
             {
-                data.slice(0, storiesQuantity).map((id: number) => (
+                data.slice(startIndex, endIndex).map((id: number) => (
                     <Card id={id} />
                 ))
             }
-
         </div>
     )
 }
