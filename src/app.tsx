@@ -1,4 +1,4 @@
-
+import { Analytics } from '@vercel/analytics/react';
 import { Footer } from '@/components/Footer';
 import { useState } from 'preact/hooks';
 import { Articles } from '@/components/Articles';
@@ -28,19 +28,24 @@ export function App() {
 
 
   return (
-    <div class="flex flex-col items-center h-full w-screen">
-      <h1 class="text-4xl md:text-4xl font-bold text-center text-slate-500 mt-10 mb-5">
-        BlackHat <span class="text-orange-600">News!</span>
-      </h1>
-      <div class="flex justify-evenly w-2/3">
-        <SelectStorieType setSelectedStorie={setSelectedStorie} />
-        <SelectStoriesNumber setNumberOfStories={setNumberOfStories} />
+    <>
+
+
+      <div class="flex flex-col items-center h-full w-screen">
+        <h1 class="text-4xl md:text-4xl font-bold text-center text-slate-500 mt-10 mb-5">
+          BlackHat <span class="text-orange-600">News!</span>
+        </h1>
+        <div class="flex justify-evenly w-2/3">
+          <SelectStorieType setSelectedStorie={setSelectedStorie} />
+          <SelectStoriesNumber setNumberOfStories={setNumberOfStories} />
+        </div>
+        <Articles storieType={currentStorie} storiesQuantity={numberOfStories} pageNumber={page} />
+        <div class="mt-7 ">
+          <Pagination articlesPerPage={numberOfStories} pageNum={page} setPageNumber={setPage} />
+        </div>
+        <Footer />
       </div>
-      <Articles storieType={currentStorie} storiesQuantity={numberOfStories} pageNumber={page} />
-      <div class="mt-7 ">
-        <Pagination articlesPerPage={numberOfStories} pageNum={page} setPageNumber={setPage} />
-      </div>
-      <Footer />
-    </div>
+      <Analytics />
+    </>
   )
 }
