@@ -19,7 +19,7 @@
     "jsxImportSource": "preact",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": "./",
+    "baseUrl": "src/",
     "types": [
       "vite-plugin-pwa/client"
     ],
@@ -29,6 +29,9 @@
       ],
       "react-dom": [
         "./node_modules/preact/compat/"
+      ],
+      "@/*": [
+        "./*"
       ]
     }
   },
