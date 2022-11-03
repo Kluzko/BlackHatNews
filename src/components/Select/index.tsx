@@ -86,7 +86,7 @@ type SelectStoriesNumber = {
 }
 
 export const SelectStoriesNumber = ({ setNumberOfStories }: SelectStoriesNumber) => (
-    <Select tailwindCss={"w-10 md:w-20"}
+    <Select tailwindCss={"w-15 md:w-20"}
         onChange={(e => setNumberOfStories(Number(e.currentTarget.value)))}
 
     >
