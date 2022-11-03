@@ -1,4 +1,4 @@
-import { useFetchHackerNews } from "../../hooks"
+import { useFetchHackerNews } from "@/hooks"
 import Card from "../Card"
 import { LoadingError } from "../Error"
 import { BaseLoader } from "../Loader"

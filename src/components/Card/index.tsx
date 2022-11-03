@@ -1,7 +1,7 @@
-import { getDate } from "../../helpers";
+import { getDate } from "@/helpers";
 import { CardLoaderSkielton } from "../Loader";
 import { LoadingError } from "../Error";
-import { useFetchHackerNews } from "../../hooks";
+import { useFetchHackerNews } from "@/hooks";
 
 
 
