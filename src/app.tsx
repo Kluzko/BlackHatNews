@@ -1,31 +1,37 @@
-
-import { Footer } from '@/components/Footer';
-import { useState } from 'preact/hooks';
-import { Articles } from '@/components/Articles';
-import { Pagination } from '@/components/Pagination';
-import { SelectStoriesNumber, SelectStorieType } from '@/components/Select';
+import { Footer } from "@/components/Footer";
+import { useLayoutEffect, useState } from "preact/hooks";
+import { Articles } from "@/components/Articles";
+import { Pagination } from "@/components/Pagination";
+import { SelectStoriesNumber, SelectStorieType } from "@/components/Select";
+import { BackToTopBtn } from "./components/Buttons";
 
 export function App() {
+  const [selectedStorie, setSelectedStorie] = useState("TOP");
+  const [numberOfStories, setNumberOfStories] = useState(5);
+  const [page, setPage] = useState(0);
+  const [isVisableBackToTop, setIsVisableBackToTop] = useState(false);
 
-
-  const [selectedStorie, setSelectedStorie] = useState("TOP")
-  const [numberOfStories, setNumberOfStories] = useState(5)
-  const [page, setPage] = useState(0)
-
-
-  let currentStorie: storiesUriType = "topstories.json"
+  let currentStorie: storiesUriType = "topstories.json";
 
   if (selectedStorie === "TOP") {
-    currentStorie = "topstories.json"
+    currentStorie = "topstories.json";
   }
   if (selectedStorie === "BEST") {
-    currentStorie = "beststories.json"
+    currentStorie = "beststories.json";
   }
   if (selectedStorie === "NEW") {
-    currentStorie = "newstories.json"
+    currentStorie = "newstories.json";
   }
 
-
+  useLayoutEffect(() => {
+    document.addEventListener("scroll", () => {
+      if (window.scrollY > 250) {
+        setIsVisableBackToTop(true);
+      } else {
+        setIsVisableBackToTop(false);
+      }
+    });
+  }, []);
 
   return (
     <div class="flex flex-col items-center h-full w-screen">
@@ -36,11 +42,20 @@ export function App() {
         <SelectStorieType setSelectedStorie={setSelectedStorie} />
         <SelectStoriesNumber setNumberOfStories={setNumberOfStories} />
       </div>
-      <Articles storieType={currentStorie} storiesQuantity={numberOfStories} pageNumber={page} />
+      <Articles
+        storieType={currentStorie}
+        storiesQuantity={numberOfStories}
+        pageNumber={page}
+      />
       <div class="mt-7 ">
-        <Pagination articlesPerPage={numberOfStories} pageNum={page} setPageNumber={setPage} />
+        <Pagination
+          articlesPerPage={numberOfStories}
+          pageNum={page}
+          setPageNumber={setPage}
+        />
       </div>
+      {isVisableBackToTop && <BackToTopBtn />}
       <Footer />
     </div>
-  )
+  );
 }
