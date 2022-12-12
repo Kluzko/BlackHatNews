@@ -1,4 +1,5 @@
-import type { FunctionComponent, StateUpdater } from "preact/compat";
+import { OptionsContext } from "@/Context/options-context";
+import { FunctionComponent, StateUpdater, useContext } from "preact/compat";
 
 const SelectStorieOptions = [
   {
@@ -64,34 +65,33 @@ const Select: FunctionComponent<SelectProps> = ({
   );
 };
 
-type SelectStorieType = {
-  setSelectedStorie: StateUpdater<string>;
+export const SelectStorieType = () => {
+  const { changeOrderStoriesBy } = useContext(OptionsContext);
+  return (
+    <Select
+      tailwindCss={"w-40 md:w-60"}
+      onChange={(e) =>
+        changeOrderStoriesBy(e.currentTarget.value as "TOP" | "BEST" | "NEW")
+      }
+    >
+      {SelectStorieOptions.map(({ val, text }) => (
+        <option value={val}>{text}</option>
+      ))}
+    </Select>
+  );
 };
 
-export const SelectStorieType = ({ setSelectedStorie }: SelectStorieType) => (
-  <Select
-    tailwindCss={"w-40 md:w-60"}
-    onChange={(e) => setSelectedStorie(e.currentTarget.value)}
-  >
-    {SelectStorieOptions.map(({ val, text }) => (
-      <option value={val}>{text}</option>
-    ))}
-  </Select>
-);
+export const SelectStoriesNumber = () => {
+  const { changeStoriesNumber } = useContext(OptionsContext);
 
-type SelectStoriesNumber = {
-  setNumberOfStories: StateUpdater<number>;
+  return (
+    <Select
+      tailwindCss={"w-15 md:w-20"}
+      onChange={(e) => changeStoriesNumber(Number(e.currentTarget.value))}
+    >
+      {SelectStorieNumberOptions.map(({ val, text }) => (
+        <option value={Number(val)}>{text}</option>
+      ))}
+    </Select>
+  );
 };
-
-export const SelectStoriesNumber = ({
-  setNumberOfStories,
-}: SelectStoriesNumber) => (
-  <Select
-    tailwindCss={"w-15 md:w-20"}
-    onChange={(e) => setNumberOfStories(Number(e.currentTarget.value))}
-  >
-    {SelectStorieNumberOptions.map(({ val, text }) => (
-      <option value={Number(val)}>{text}</option>
-    ))}
-  </Select>
-);
