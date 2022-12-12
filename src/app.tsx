@@ -1,9 +1,9 @@
-import { Footer } from "@/components/Footer";
 import { useLayoutEffect, useState } from "preact/hooks";
+import { Footer } from "@/components/Footer";
 import { Articles } from "@/components/Articles";
 import { Pagination } from "@/components/Pagination";
 import { SelectStoriesNumber, SelectStorieType } from "@/components/Select";
-import { BackToTopBtn } from "./components/Buttons";
+import { BackToTopBtn } from "@/components/Buttons";
 
 export function App() {
   const [selectedStorie, setSelectedStorie] = useState("TOP");
