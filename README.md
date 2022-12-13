@@ -1,6 +1,6 @@
 # BlackHatNews
-
-I want to create more modern versio of Hacker News site 
+## Why ?
+I want to create more modern versino of Hacker News site 
 
 
 ## Tech Stack
