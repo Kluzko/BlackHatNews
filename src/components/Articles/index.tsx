@@ -38,8 +38,8 @@ export const Articles = ({ pageNumber }: ArticlesProps) => {
 
   const endIndex = startIndex + storiesNumber;
 
-  if (error) return <LoadingError />;
   if (!data) return <BaseLoader />;
+  if (error) return <LoadingError />;
 
   // Set number of stories
   useEffect(() => {
