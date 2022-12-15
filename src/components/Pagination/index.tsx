@@ -14,27 +14,17 @@ export const Pagination = ({ pageNum, setPageNumber }: PaginationProps) => {
   const [pages, setPages] = useState<number[]>([]);
 
   const {
-    options: { numberOfStories, storiesNumber },
+    options: { numberOfStories, storiesNumber, orderStoriesBy },
   } = useContext(OptionsContext);
 
   const PAGE_COUNT = numberOfStories / storiesNumber;
 
   const buildPagination = (pageIndex: number) => {
     setPageNumber(pageIndex);
-    let newPages = [],
-      start = 0,
-      end = PAGES_TO_DISPLAY;
 
-    if (pageIndex > (PAGES_TO_DISPLAY - 1) / 2) {
-      start = pageIndex - (PAGES_TO_DISPLAY - 1) / 2;
-      end = start + PAGES_TO_DISPLAY;
-    }
-
-    if (pageIndex > PAGE_COUNT - (PAGES_TO_DISPLAY + 1) / 2) {
-      start = pageIndex - 3;
-      end = PAGE_COUNT;
-    }
-
+    const start = Math.max(0, pageIndex - (PAGES_TO_DISPLAY - 1) / 2);
+    const end = Math.min(PAGE_COUNT, start + PAGES_TO_DISPLAY);
+    const newPages = [];
     for (let i = start; i < end; i++) {
       newPages.push(i);
     }
@@ -43,8 +33,9 @@ export const Pagination = ({ pageNum, setPageNumber }: PaginationProps) => {
 
   useEffect(() => {
     buildPagination(0);
-  }, []);
+  }, [storiesNumber, orderStoriesBy]);
 
+  console.log(pages, pageNum);
   const btnClass =
     "grid place-items-center w-9 h-9 p-0 border-0 rounded text-gray-200  disabled:opacity-25 disabled:cursor-not-allowed ";
 

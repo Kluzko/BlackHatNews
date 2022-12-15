@@ -19,8 +19,8 @@ export function App() {
           BlackHat <span class="text-orange-600">News!</span>
         </h1>
         <div class="flex justify-evenly w-2/3">
-          <SelectStorieType />
-          <SelectStoriesNumber />
+          <SelectStorieType setPage={setPage} />
+          <SelectStoriesNumber setPage={setPage} />
         </div>
         <Articles pageNumber={page} />
         <div class="mt-7 ">

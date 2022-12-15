@@ -2,7 +2,6 @@ import { OptionsContext } from "@/Context/options-context";
 import { useFetchHackerNews } from "@/hooks";
 import { useContext, useEffect } from "preact/hooks";
 import Card from "../Card";
-import { LoadingError } from "../Error";
 import { BaseLoader } from "../Loader";
 
 type ArticlesProps = {
@@ -15,35 +14,25 @@ export const Articles = ({ pageNumber }: ArticlesProps) => {
     options: { storiesNumber, orderStoriesBy },
   } = useContext(OptionsContext);
 
-  let currentStorie: storiesUriType = "topstories.json";
+  let currentStorie: storiesUriType =
+    orderStoriesBy === "TOP"
+      ? "topstories.json"
+      : orderStoriesBy === "BEST"
+      ? "beststories.json"
+      : "newstories.json";
 
-  if (orderStoriesBy === "TOP") {
-    currentStorie = "topstories.json";
-  }
-  if (orderStoriesBy === "BEST") {
-    currentStorie = "beststories.json";
-  }
-  if (orderStoriesBy === "NEW") {
-    currentStorie = "newstories.json";
-  }
-
-  const { data, error } = useFetchHackerNews<number[]>({
+  const { data } = useFetchHackerNews<number[]>({
     uri: currentStorie,
   });
 
-  const startIndex =
-    pageNumber === 0
-      ? pageNumber * storiesNumber
-      : pageNumber * storiesNumber + 1;
-
+  const startIndex = pageNumber * storiesNumber;
   const endIndex = startIndex + storiesNumber;
 
   if (!data) return <BaseLoader />;
-  if (error) return <LoadingError />;
 
   // Set number of stories
   useEffect(() => {
-    changeNumberOfStories(data.length);
+    if (data) changeNumberOfStories(data.length);
   }, [data]);
 
   return (
