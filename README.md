@@ -1,14 +1,20 @@
-# BlackHatNews
-## Why ?
-I want to create more modern version of Hacker News site 
+# BlackHat News
+
+BlackHat News is an app that shows the latest news from the hacker news API. It features a modern design and a dark mode option for a more comfortable reading experience.
 
 
-## Tech Stack
+## Features
 
-- Preact (Typescript)
-- Tailwind
-- Vite 
+- List articles by number (5, 10, 20) 
+- Categories: Best Stories, New Stories, Top Stories 
+- Designed for dark mode
 
-## Contact
+## Future Plans
+- Bookmark feature 
+- Filter already read stories 
+- Categorize articles by topic 
 
-If you find any bug in this app or want to suggest some features please mail me at kluzniakkuba@gmail.com
+
+## Contributing
+
+If you would like to contribute to BlackHat News, simply fork the repository and create a pull request with your changes. All contributions are welcome!
