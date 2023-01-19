@@ -12,7 +12,7 @@ BlackHat News is an app that shows the latest news from the hacker news API. It 
 ## Future Plans
 - Bookmark feature 
 - Filter already read stories 
-- Categorize articles by topic 
+- Categorize articles using ml  
 
 
 ## Contributing
